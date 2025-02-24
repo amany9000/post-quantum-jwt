@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@noble/post-quantum": "^0.4.0"
+    "@noble/post-quantum": "^0.4.0",
+    "djwt": "^2.0.0"
   }
 }

@@ -15,8 +15,10 @@
 
 <br />
 
+---
+
 # post-quantum-jwt
-An POC to demonstrate how one can create post-quantum JWTs with djwt.
+An POC to demonstrate how one can create post-quantum JWTs with [djwt](https://github.com/amany9000/dJWT).
 
 ---
 
@@ -29,12 +31,9 @@ npm install
 
 ## How to use 🛠️
 
----
-
-## ✍️ Contributing
-Found a bug? Create an [issue](https://github.com/amany9000/post-quantum-jwt/issues).
-
-If you have a contribution in mind, please check out our [Contribution Guide](https://github.com/amany9000/post-quantum-jwt/blob/main/CONTRIBUTING.md) for information on how to do so. 
+```sh
+ tsx token.ts
+```
 
 ---
 

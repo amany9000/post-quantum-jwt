@@ -19,7 +19,7 @@ import {signDilithium, verifyDilithium} from "./dilithium";
       };
       const token = await signJWT(payload, signDilithium, { algorithm });
 
-      console.log(`Signed JWT token: ${token}`)
+      console.log(`\nSigned JWT token:\n${token}\n`)
 
       const receivedToken = await verifyJWT(token, verifyDilithium, {
         complete: true,
@@ -31,5 +31,5 @@ import {signDilithium, verifyDilithium} from "./dilithium";
         algorithm,
       });
 
-      console.log(`Decode JWT token JSON returned after verification:`, receivedToken)
+      console.log(`\n\nDecoded JWT token JSON returned after verification:\n`, receivedToken)
 })()

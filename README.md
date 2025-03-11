@@ -31,8 +31,14 @@ npm install
 
 ## How to use 🛠️
 
+Genrate Keys
 ```sh
- tsx token.ts
+tsx generateKeys.ts 
+```
+
+Create token:= 
+```sh
+tsx token.ts
 ```
 
 ---

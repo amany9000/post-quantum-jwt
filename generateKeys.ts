@@ -1,18 +1,30 @@
 import { ml_dsa87 } from '@noble/post-quantum/ml-dsa';
+import { slh_dsa_sha2_192s } from '@noble/post-quantum/slh-dsa';
 import { randomBytes } from '@noble/post-quantum/utils';
 import { bytesToHex } from '@noble/hashes/utils';
 import { writeFileSync } from 'fs';
 
 
 (async function test() {
-    const seed = randomBytes(32);
+    let seed = randomBytes(32);
 
     const keys = ml_dsa87.keygen(seed); 
     const pkHex = bytesToHex(keys.publicKey);
     const skHex = bytesToHex(keys.secretKey);
 
-    console.log("Pk hex", pkHex);
-    console.log("\n\n\nSk hex", skHex);
+    console.log("Dilithium Pk hex", pkHex);
+    console.log("\n\nDilithium Sk hex", skHex);
 
-    writeFileSync('./keys.json', JSON.stringify({'secretKey': skHex, 'publicKey': pkHex}));
+    writeFileSync('./keysDilithium.json', JSON.stringify({'secretKey': skHex, 'publicKey': pkHex}));
+
+    seed = randomBytes(72);
+
+    const keysSphincs = slh_dsa_sha2_192s.keygen(seed); 
+    const pkHexSphincs = bytesToHex(keysSphincs.publicKey);
+    const skHexSphincs = bytesToHex(keysSphincs.secretKey);
+
+    console.log("\n\n\nSphincs Pk hex", pkHexSphincs);
+    console.log("\n\nSphincs Sk hex", skHexSphincs);
+
+    writeFileSync('./keysSphincs.json', JSON.stringify({'secretKey': skHexSphincs, 'publicKey': pkHexSphincs}));
 })();

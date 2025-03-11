@@ -1,14 +1,14 @@
 import { ml_dsa87 } from '@noble/post-quantum/ml-dsa';
-import { hexToBytes, utf8ToBytes, bytesToHex } from '@noble/hashes/utils'
+import { hexToBytes, utf8ToBytes } from '@noble/hashes/utils'
 
-import { getSecretKey } from './kms'
+import { getSecretKey, AlgoType } from './kms'
 
 
 export function signDilithium(msg: string) {
     const msgBytes = utf8ToBytes(msg);
     const sig = Buffer.from(
-        ml_dsa87.sign(getSecretKey(true) as Uint8Array<ArrayBufferLike>,
-        msgBytes)
+        ml_dsa87.sign(getSecretKey(AlgoType.DILITHIUM, true) as Uint8Array<ArrayBufferLike>,
+            msgBytes)
     ).toString('hex');
 
     return sig;

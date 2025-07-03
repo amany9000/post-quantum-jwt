@@ -2,7 +2,7 @@
 import { slh_dsa_sha2_128s } from '@noble/post-quantum/slh-dsa';
 import { hexToBytes, utf8ToBytes } from '@noble/hashes/utils'
 
-import { getSecretKey, AlgoType } from './kms'
+import { getSecretKey, AlgoType, getPublicKeyFromId } from './kms'
 
 
 export function signSphincs(msg: string) {
@@ -15,10 +15,10 @@ export function signSphincs(msg: string) {
     return sig;
 }
 
-export function verifySphincs(payload: string, sig: string, publicKey: string) {
+export function verifySphincs(payload: string, sig: string, id: string) {
     const msgBytes = utf8ToBytes(payload);
     const sigBytes = hexToBytes(sig.slice(2));
-    const publicKeyBytes = hexToBytes(publicKey);
+    const publicKeyBytes = hexToBytes(getPublicKeyFromId(id));
 
     const verificationResult = slh_dsa_sha2_128s.verify(publicKeyBytes, msgBytes, sigBytes);
     return verificationResult;

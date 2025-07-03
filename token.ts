@@ -1,7 +1,7 @@
 import {signJWT, verifyJWT} from "djwt";
 
 
-import { getPublicKey, AlgoType } from './kms'
+import { getId, AlgoType } from './kms'
 import {signDilithium, verifyDilithium} from "./dilithium";
 import { signSphincs, verifySphincs } from "./sphincs";
 
@@ -9,14 +9,14 @@ import { signSphincs, verifySphincs } from "./sphincs";
 
   /** Dilithium JWT */
 
-  const pk = getPublicKey(AlgoType.DILITHIUM) as string;
+  const id = getId(AlgoType.DILITHIUM);
   const algorithm = "PQDI3";
   
   const payload = {
       nonce: 654321,
       iat: 1582062696,
       exp: 1782098690,
-      iss: pk,
+      iss: id,
       nbf: 100000000,
       sub: "user123",
       jti: "324221"
@@ -28,7 +28,7 @@ import { signSphincs, verifySphincs } from "./sphincs";
       complete: true,
       nonce: 654321,
       maxAge: 10000000000,
-      issuer: pk,
+      issuer: id,
       jwtid: "324221",
       subject: "user123",
       algorithm,
@@ -36,14 +36,14 @@ import { signSphincs, verifySphincs } from "./sphincs";
     console.log(`\n\nDecoded Dilithium JWT token returned after verification:\n`, decodedToken);
 
   /** Sphincs JWT */
-  const pkSphincs = getPublicKey(AlgoType.SPHINCS) as string;
+  const idSphincs = getId(AlgoType.SPHINCS);
   const algorithmSphincs = "PQDI3";
   
   const payloadSphincs = {
       nonce: 654321,
       iat: 1582062696,
       exp: 1782098690,
-      iss: pkSphincs,
+      iss: idSphincs,
       nbf: 100000000,
       sub: "user123",
       jti: "324221"
@@ -55,7 +55,7 @@ import { signSphincs, verifySphincs } from "./sphincs";
       complete: true,
       nonce: 654321,
       maxAge: 10000000000,
-      issuer: pkSphincs,
+      issuer: idSphincs,
       jwtid: "324221",
       subject: "user123",
       algorithm: algorithmSphincs,

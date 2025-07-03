@@ -134,9 +134,5 @@ package-lock.json
 # For macOS
 .DS_Store
 
-# build
-lib
-
 # keys
-keysSphincs.json
-keysDilithium.json
+keys.json

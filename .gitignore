@@ -136,3 +136,7 @@ package-lock.json
 
 # build
 lib
+
+# keys
+keysSphincs.json
+keysDilithium.json

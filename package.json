@@ -12,5 +12,8 @@
     "@noble/post-quantum": "^0.4.0",
     "djwt": "^2.0.0",
     "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10"
   }
 }

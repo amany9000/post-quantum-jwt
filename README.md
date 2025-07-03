@@ -15,10 +15,8 @@
 
 <br />
 
----
-
 # post-quantum-jwt
-An POC to demonstrate how one can create post-quantum JWTs with [djwt](https://github.com/amany9000/dJWT).
+A POC for post-quantum JWT generation with the lib [djwt](https://github.com/amany9000/dJWT). The post-quantum digital signature algorithms are generated using [noble-post-quantum](https://github.com/paulmillr/noble-post-quantum)
 
 ---
 
@@ -36,7 +34,7 @@ Genrate Keys
 tsx generateKeys.ts 
 ```
 
-Create token:= 
+Create token 
 ```sh
 tsx token.ts
 ```

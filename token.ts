@@ -60,5 +60,5 @@ import { signSphincs, verifySphincs } from "./sphincs";
       subject: "user123",
       algorithm: algorithmSphincs,
     });
-    console.log(`\n\nDecoded Sphincs JWT token returned after verification:\n`);
+    console.log(`\n\nDecoded Sphincs JWT token returned after verification:\n`, decodeTokenSphincs);
 })();

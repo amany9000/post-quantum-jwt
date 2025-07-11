@@ -1,3 +1,4 @@
+// SPHINCS implementation
 
 import { slh_dsa_sha2_128s } from '@noble/post-quantum/slh-dsa';
 import { hexToBytes, utf8ToBytes } from '@noble/hashes/utils'

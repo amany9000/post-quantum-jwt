@@ -31,7 +31,7 @@ npm install
 
 ## How to use 🛠️
 
-Genrate Keys
+Generate Keys
 ```sh
 tsx generateKeys.ts 
 ```
@@ -61,3 +61,4 @@ If you want to say thank you and/or show support for post-quantum-jwt:
 ### Developer 🧑🏻‍💻
 
 - [Myself](https://github.com/amany9000)
+

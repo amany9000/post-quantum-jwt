@@ -1,3 +1,5 @@
+// DILITHIUM implementation
+
 import { ml_dsa44 } from '@noble/post-quantum/ml-dsa';
 import { hexToBytes, utf8ToBytes } from '@noble/hashes/utils'
 

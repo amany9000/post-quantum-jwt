@@ -1,3 +1,5 @@
+// Key Management Service (KMS) implementation
+
 import { hexToBytes } from '@noble/hashes/utils'
 import { readFileSync } from 'fs';
 

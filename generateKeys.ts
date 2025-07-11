@@ -1,3 +1,5 @@
+// Key Generation implementation
+
 import { ml_dsa44 } from '@noble/post-quantum/ml-dsa';
 import { slh_dsa_sha2_128s } from '@noble/post-quantum/slh-dsa';
 import { randomBytes } from '@noble/post-quantum/utils';

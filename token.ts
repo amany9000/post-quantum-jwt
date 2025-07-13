@@ -1,12 +1,10 @@
-import { signJWT, verifyJWT } from 'djwt';
+import { signJWT, verifyJWT, Payload } from 'djwt';
 
 import { getId, AlgoType } from './kms';
 import { signDilithium, verifyDilithium } from './dilithium';
 import { signSphincs, verifySphincs } from './sphincs';
 
-(async function test() {
-  /** Dilithium JWT **/
-
+export async function generateJwtDilithium(user: string): Promise<string> {
   /**
     ID is the BLAKE2s Hash of Issuer's Dilithium Public Key.
     Public Key size ~ 1.3kb
@@ -26,8 +24,7 @@ import { signSphincs, verifySphincs } from './sphincs';
     iat,
     exp,
     iss: id,
-    sub: 'user123',
-    jti: '324221',
+    sub: user,
   };
 
   /** 
@@ -37,6 +34,13 @@ import { signSphincs, verifySphincs } from './sphincs';
   const token = await signJWT(payload, signDilithium, { algorithm });
   console.log(`JWT token Signed with Dilithium:\n${token}\n`);
 
+  return token;
+}
+
+export async function verifyJwtDilithium(token: string): Promise<Payload> {
+  const id = getId(AlgoType.DILITHIUM);
+  const algorithm = 'MLDSA44';
+
   /** 
     verifyDilithium() from ./dilithium.ts is passed to verifyJWT(). It must
     adhere to the Verifier interface of djwt.
@@ -44,10 +48,7 @@ import { signSphincs, verifySphincs } from './sphincs';
   const decodedToken = await verifyJWT(token, verifyDilithium, {
     complete: true,
     nonce: 654321,
-    maxAge: exp,
     issuer: id,
-    jwtid: '324221',
-    subject: 'user123',
     algorithm,
   });
   console.log(
@@ -55,8 +56,10 @@ import { signSphincs, verifySphincs } from './sphincs';
     decodedToken
   );
 
-  /** Sphincs JWT */
+  return decodedToken.payload as Payload;
+}
 
+export async function generateJwtSphincs(user: string): Promise<string> {
   /**
     ID is the BLAKE2s Hash of Issuer's SPHINCS Public Key.
     Public Key size = 32 Bytes
@@ -65,13 +68,18 @@ import { signSphincs, verifySphincs } from './sphincs';
   const idSphincs = getId(AlgoType.SPHINCS);
   const algorithmSphincs = 'SLH128';
 
+  // Issued At timestamp
+  const iat = Math.ceil(Date.now() / 1000);
+
+  // Expiry timestamp
+  const exp = iat + 3600;
+
   const payloadSphincs = {
     nonce: 654321,
     iat,
     exp,
     iss: idSphincs,
-    sub: 'user123',
-    jti: '324221',
+    sub: user,
   };
 
   /** 
@@ -83,21 +91,27 @@ import { signSphincs, verifySphincs } from './sphincs';
   });
   console.log(`\n\n\nJWT token Signed with Sphincs:\n${tokenSphincs}\n`);
 
+  return tokenSphincs;
+}
+
+export async function verifyJwtSphincs(token: string): Promise<Payload> {
+  const idSphincs = getId(AlgoType.SPHINCS);
+  const algorithmSphincs = 'SLH128';
+
   /** 
     verifySphincs() from ./sphincs.ts is passed to verifyJWT(). It must
     adhere to the Verifier interface of djwt.
   **/
-  const decodeTokenSphincs = await verifyJWT(tokenSphincs, verifySphincs, {
+  const decodeTokenSphincs = await verifyJWT(token, verifySphincs, {
     complete: true,
     nonce: 654321,
-    maxAge: exp,
     issuer: idSphincs,
-    jwtid: '324221',
-    subject: 'user123',
     algorithm: algorithmSphincs,
   });
   console.log(
     `\n\nDecoded Sphincs JWT token returned after verification:\n`,
     decodeTokenSphincs
   );
-})();
+
+  return decodeTokenSphincs.payload as Payload;
+}

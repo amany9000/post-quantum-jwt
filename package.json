@@ -10,10 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "@noble/post-quantum": "^0.4.0",
+    "body-parser": "^2.2.0",
     "djwt": "^2.0.0",
+    "express": "^5.1.0",
     "tsx": "^4.19.3"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@types/node": "^24.0.10"
   }
 }
